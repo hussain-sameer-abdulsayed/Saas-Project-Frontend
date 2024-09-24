@@ -1,5 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FaFacebookSquare } from 'react-icons/fa';
+import { FaInstagramSquare } from 'react-icons/fa';
+import { FaSquareWhatsapp } from 'react-icons/fa6';
+import { MdOutlineMail } from 'react-icons/md';
+import { FaLocationDot } from 'react-icons/fa6';
 
 const textDirection = {
   direction: 'rtl',

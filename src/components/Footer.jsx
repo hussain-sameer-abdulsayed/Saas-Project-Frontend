@@ -1,3 +1,10 @@
+import { FaFacebookSquare } from 'react-icons/fa';
+import { FaInstagramSquare } from 'react-icons/fa';
+import { FaSquareWhatsapp } from 'react-icons/fa6';
+import { MdOutlineMail } from 'react-icons/md';
+import { FaLocationDot } from 'react-icons/fa6';
+import { Link } from 'react-router-dom';
+
 const Footer = () => {
   return (
     <footer className="bg-gray-900 text-gray-300 py-10 px-10 mt-10">
@@ -6,14 +13,23 @@ const Footer = () => {
         <div className="space-y-4">
           <h2 className="text-3xl text-white">3D Electronics</h2>
           <ul className="space-y-2">
-            <li>
-              3D Electronics <span className="ml-2">📘</span>
+            <li className="hover:bg-sky-700">
+              <Link to={'https://www.facebook.com/'}>
+                3D Electronics
+                <FaFacebookSquare className="inline ml-2 text-2xl" />
+              </Link>
             </li>
             <li>
-              3d@3d-iraq.com <span className="ml-2">📧</span>
+              <Link to={'https://www.instagram.com/'}>
+                3d_electronicsiq
+                <FaInstagramSquare className="inline ml-2 text-2xl" />
+              </Link>
             </li>
             <li>
-              +9647700612084 <span className="ml-2">📞</span>
+              <Link to={'https://Wa.me/+9647849678401'}>
+                +9647849678401
+                <FaSquareWhatsapp className="inline ml-2 text-2xl" />
+              </Link>
             </li>
           </ul>
         </div>
