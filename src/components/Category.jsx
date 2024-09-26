@@ -22,7 +22,7 @@ const Category = () => {
     fetchCategoryProducts();
   }, []);
   return (
-    <div className="py-8 bg-gray-900">
+    <div className="py-8 bg-gray-900 pt-32 ">
       <div className="px-20 flex flex-wrap justify-around">
         {products.map((product) => (
           <Card key={product.id} item={product} type="product" />

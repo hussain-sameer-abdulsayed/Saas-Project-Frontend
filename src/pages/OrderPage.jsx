@@ -108,7 +108,7 @@ const OrderPage = () => {
   };
 
   return (
-    <div className="container mx-auto p-10 flex justify-between">
+    <div className="container mx-auto bg-gray-800 p-10 flex justify-between">
       {/* Left: Order Form */}
       <div className="w-1/2 bg-gray-800 p-8 rounded-lg text-white">
         <h2 className="text-2xl mb-4 text-right">معلومات الزبون</h2>
@@ -153,6 +153,7 @@ const OrderPage = () => {
           <input
             type="text"
             value={companyName}
+            placeholder="اذا كنت صاحب شركة"
             onChange={(e) => setCompanyName(e.target.value)}
             className="w-full p-2 rounded bg-gray-700 text-white text-right"
           />
@@ -198,6 +199,7 @@ const OrderPage = () => {
           <input
             type="tel"
             value={phoneNumber}
+            placeholder="07xxxxxxxxx"
             onChange={(e) => setPhoneNumber(e.target.value)}
             className="w-full p-2 rounded bg-gray-700 text-white text-right"
             required

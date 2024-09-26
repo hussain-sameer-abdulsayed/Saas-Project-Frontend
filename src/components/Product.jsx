@@ -66,7 +66,7 @@ const Product = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center p-10">
+    <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center pt-8 px-10">
       <div className="flex flex-col md:flex-row bg-gray-800 p-8 rounded-lg shadow-lg w-full md:max-w-5xl">
         {/* Product Image */}
         <div className="w-full md:w-1/2 p-4 flex justify-center">

@@ -83,7 +83,7 @@ const CartPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white p-5">
+    <div className="min-h-screen bg-gray-900 text-white pt-32 px-5">
       <h2 className="text-3xl font-bold text-right">السلة</h2>
       <div className="w-full max-w-5xl mx-auto">
         <div className="flex justify-between">

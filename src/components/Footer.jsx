@@ -3,11 +3,12 @@ import { FaInstagramSquare } from 'react-icons/fa';
 import { FaSquareWhatsapp } from 'react-icons/fa6';
 import { MdOutlineMail } from 'react-icons/md';
 import { FaLocationDot } from 'react-icons/fa6';
+import { MdPhone } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-gray-300 py-10 px-10 mt-10">
+    <footer className="bg-gray-900 text-gray-300 py-10 px-10">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
         {/* Left Section: Contact Info */}
         <div className="space-y-4">
@@ -28,7 +29,7 @@ const Footer = () => {
             <li>
               <Link to={'https://Wa.me/+9647849678401'}>
                 +9647849678401
-                <FaSquareWhatsapp className="inline ml-2 text-2xl" />
+                <MdPhone className="inline ml-2 text-2xl" />
               </Link>
             </li>
           </ul>

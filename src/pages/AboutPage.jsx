@@ -67,12 +67,12 @@ const partners = [
 
 const AboutPage = () => {
   return (
-    <div className="container mx-auto p-10">
+    <div className="container bg-gray-800 mx-auto pt-32 px-5 text-white">
       {/* Summary Section */}
       <section className="mb-10">
         <h2 className="text-3xl font-bold mb-4 text-center">من نحن؟</h2>
         <h1 className="text-3xl font-bold mb-4 text-center">3D Electronics</h1>
-        <p className="text-lg text-gray-700 text-center max-w-5xl mx-auto">
+        <p className="text-lg text-center max-w-5xl mx-auto">
           بدأ مشوارنا التجاري عام 1998 في بغداد - منطقة حي الجامعة - مجمع الرشيد
           التجاري كمحل تجاري بسيط بإسم ( الابعاد الثلاثة ) وتم استيحاء الاسم
           آنذاك بسبب تكنولوجيا انتقال التصاميم المرئية والألعاب الالكترونية من
@@ -107,7 +107,7 @@ const AboutPage = () => {
         </div>
       </section>
       <section className="mb-10">
-        <p className="text-lg text-gray-700 text-center max-w-5xl mx-auto">
+        <p className="text-lg text-center max-w-5xl mx-auto">
           تعد شركتنا مورداً رئيسياً لمكونات الكمبيوتر وملحقاته واكسسواراته لجميع
           أنحاء العراق. وكما نوفر للعديد من نقاط البيع الرئيسية الموزعة في انحاء
           العراق والمستخدمين النهائيين والطلاب وشركات القطاعين العام والخاص

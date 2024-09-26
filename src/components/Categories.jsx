@@ -20,7 +20,7 @@ const Categories = () => {
   }, []);
 
   return (
-    <div className="py-8 bg-gray-900">
+    <div className="py-8 bg-gray-900 pt-32">
       <div className="px-20 flex flex-wrap justify-around">
         {categories.map((category) => (
           <Card key={category.id} item={category} type="category" />
