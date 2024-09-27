@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const MainLayout = () => {
   return (
-    <div>
+    <div className="bg-gray-800 min-h-screen">
       <Navbar />
       <Outlet />
       <ToastContainer />

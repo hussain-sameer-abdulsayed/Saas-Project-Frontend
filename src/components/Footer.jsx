@@ -8,26 +8,35 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-gray-300 py-10 px-10">
+    <footer className="bg-gray-900 text-gray-300 w-full py-10 px-10">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
         {/* Left Section: Contact Info */}
-        <div className="space-y-4">
-          <h2 className="text-3xl text-white">3D Electronics</h2>
+        <div className="space-y-4 text-center">
+          <h2 className="text-xl text-white ml-5">تواصل معنا</h2>
           <ul className="space-y-2">
-            <li className="hover:bg-sky-700">
-              <Link to={'https://www.facebook.com/'}>
+            <li>
+              <Link
+                to={'https://www.facebook.com/'}
+                className="hover:text-white"
+              >
                 3D Electronics
                 <FaFacebookSquare className="inline ml-2 text-2xl" />
               </Link>
             </li>
             <li>
-              <Link to={'https://www.instagram.com/'}>
+              <Link
+                to={'https://www.instagram.com/'}
+                className="hover:text-white"
+              >
                 3d_electronicsiq
                 <FaInstagramSquare className="inline ml-2 text-2xl" />
               </Link>
             </li>
             <li>
-              <Link to={'https://Wa.me/+9647849678401'}>
+              <Link
+                to={'https://Wa.me/+9647849678401'}
+                className="hover:text-white"
+              >
                 +9647849678401
                 <MdPhone className="inline ml-2 text-2xl" />
               </Link>
@@ -58,7 +67,7 @@ const Footer = () => {
         </div>
 
         {/* Right Section: Company Info */}
-        <div className="space-y-4 text-right">
+        <div className="space-y-4 text-center">
           <h3 className="text-xl text-white">3D Electronics</h3>
           <p>
             شركة مختصة بتجارة الإلكترونيات (الحاسبات واكسسواراتها، جميع ملحقات
