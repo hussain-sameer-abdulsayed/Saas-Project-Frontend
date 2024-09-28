@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Spinner from '../components/Spinner';
 
 const OrderPage = () => {
   const [cartItems, setCartItems] = useState([]);
   const [totalAmount, setTotalAmount] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   // User information state
   const [name, setName] = useState('');
@@ -40,8 +42,10 @@ const OrderPage = () => {
   // Load cart items from localStorage when the component mounts
   useEffect(() => {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
     setCartItems(cart);
     calculateTotalAmount(cart);
+    setLoading(false);
   }, []);
 
   // Function to calculate the total amount
@@ -108,163 +112,175 @@ const OrderPage = () => {
   };
 
   return (
-    <div className="container mx-auto bg-gray-800 p-10 flex justify-between">
-      {/* Left: Order Form */}
-      <div className="w-1/2 bg-gray-800 p-8 rounded-lg text-white">
-        <h2 className="text-2xl mb-4 text-right">معلومات الزبون</h2>
+    <div className="py-8 bg-gray-900 pt-32">
+      {loading ? (
+        <Spinner />
+      ) : (
+        <div className="container mx-auto bg-gray-800 p-10 flex justify-between">
+          {/* Left: Order Form */}
+          <div className="w-1/2 bg-gray-800 p-8 rounded-lg text-white">
+            <h2 className="text-2xl mb-4 text-right">معلومات الزبون</h2>
 
-        {/* State Dropdown */}
-        <div className="mb-4 flex flex-col items-center">
-          <label className="block mb-2">
-            المحافظة <b style={{ color: 'red' }}>*</b>
-          </label>
-          <select
-            value={state}
-            onChange={(e) => setState(e.target.value)}
-            className="w-full p-2 rounded bg-gray-700 text-white text-right"
-            required
-          >
-            <option value="" disabled>
-              اختر المحافظة
-            </option>
-            {states.map((stateName) => (
-              <option key={stateName} value={stateName}>
-                {stateName}
-              </option>
-            ))}
-          </select>
+            {/* State Dropdown */}
+            <div className="mb-4 flex flex-col items-center">
+              <label className="block mb-2">
+                المحافظة <b style={{ color: 'red' }}>*</b>
+              </label>
+              <select
+                value={state}
+                onChange={(e) => setState(e.target.value)}
+                className="w-full p-2 rounded bg-gray-700 text-white text-right"
+                required
+              >
+                <option value="" disabled>
+                  اختر المحافظة
+                </option>
+                {states.map((stateName) => (
+                  <option key={stateName} value={stateName}>
+                    {stateName}
+                  </option>
+                ))}
+              </select>
+            </div>
+            {/* Form fields */}
+            <div className="mb-4 flex flex-col items-center">
+              <label className="block mb-2">
+                الأسم <b style={{ color: 'red' }}>*</b>
+              </label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full p-2 rounded bg-gray-700 text-white text-right"
+                required
+              />
+            </div>
+
+            <div className="mb-4 flex flex-col items-center">
+              <label className="block mb-2">اسم الشركة</label>
+              <input
+                type="text"
+                value={companyName}
+                placeholder="اذا كنت صاحب شركة"
+                onChange={(e) => setCompanyName(e.target.value)}
+                className="w-full p-2 rounded bg-gray-700 text-white text-right"
+              />
+            </div>
+
+            <div className="mb-4 flex flex-col items-center">
+              <label className="block mb-2">
+                اسم المنطقة <b style={{ color: 'red' }}>*</b>
+              </label>
+              <input
+                type="text"
+                value={region}
+                onChange={(e) => setRegion(e.target.value)}
+                className="w-full p-2 rounded bg-gray-700 text-white text-right"
+                required
+              />
+            </div>
+
+            <div className="mb-4 flex flex-col items-center">
+              <label className="block mb-2">أقرب منطقة دالة</label>
+              <input
+                type="text"
+                value={nearestLandmark}
+                onChange={(e) => setNearestLandmark(e.target.value)}
+                className="w-full p-2 rounded bg-gray-700 text-white text-right"
+              />
+            </div>
+
+            <div className="mb-4 flex flex-col items-center">
+              <label className="block mb-2">الإيميل</label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full p-2 rounded bg-gray-700 text-white text-right"
+              />
+            </div>
+
+            <div className="mb-4 flex flex-col items-center">
+              <label className="block mb-2">
+                رقم الهاتف <b style={{ color: 'red' }}>*</b>
+              </label>
+              <input
+                type="tel"
+                value={phoneNumber}
+                placeholder="07xxxxxxxxx"
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                className="w-full p-2 rounded bg-gray-700 text-white text-right"
+                required
+              />
+            </div>
+
+            <div className="mb-4 flex flex-col items-center">
+              <label className="block mb-2">ملاحظات</label>
+              <textarea
+                value={notes}
+                onChange={(e) => setNotes(e.target.value)}
+                className="w-full p-2 rounded bg-gray-700 text-white text-right"
+                rows="3"
+              ></textarea>
+            </div>
+          </div>
+
+          {/* Right: Order Summary */}
+          <div className="w-1/2 bg-gray-900 p-8 rounded-lg text-white">
+            <h2 className="text-2xl mb-4 text-center">البضاعة المطلوبة</h2>
+
+            {cartItems.length === 0 ? (
+              <p>لا توجد بضاعة في العربة.</p>
+            ) : (
+              <table className="w-full text-center border-collapse">
+                <thead>
+                  <tr className="border-b border-gray-700">
+                    <th className="border-2 px-2 py-3 border-gray-500">
+                      المنتج
+                    </th>
+                    <th className="border-2 px-2 py-3 border-gray-500">
+                      العدد
+                    </th>
+                    <th className="border-2 px-2 py-3 border-gray-500">
+                      السعر
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {cartItems.map((item) => (
+                    <tr key={item.id} className="border-b border-gray-700">
+                      <td className="border-2 px-2 py-3 border-gray-500">
+                        {item.name}
+                      </td>
+                      <td className="border-2 px-2 py-3 border-gray-500">
+                        {item.quantity}
+                      </td>
+                      <td className="border-2 px-2 py-3 border-gray-500">
+                        {formatNumber(item.price * item.quantity)} IQD
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td colSpan="3" className="px-2 py-3 font-bold">
+                      المجموع: {formatNumber(totalAmount)} IQD
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+            )}
+
+            {/* Submit button */}
+            <button
+              onClick={handleSubmit}
+              className="mt-4 w-full bg-green-600 p-4 rounded-lg text-xl font-bold text-white"
+            >
+              اطلب البضاعة
+            </button>
+          </div>
         </div>
-        {/* Form fields */}
-        <div className="mb-4 flex flex-col items-center">
-          <label className="block mb-2">
-            الأسم <b style={{ color: 'red' }}>*</b>
-          </label>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="w-full p-2 rounded bg-gray-700 text-white text-right"
-            required
-          />
-        </div>
-
-        <div className="mb-4 flex flex-col items-center">
-          <label className="block mb-2">اسم الشركة</label>
-          <input
-            type="text"
-            value={companyName}
-            placeholder="اذا كنت صاحب شركة"
-            onChange={(e) => setCompanyName(e.target.value)}
-            className="w-full p-2 rounded bg-gray-700 text-white text-right"
-          />
-        </div>
-
-        <div className="mb-4 flex flex-col items-center">
-          <label className="block mb-2">
-            اسم المنطقة <b style={{ color: 'red' }}>*</b>
-          </label>
-          <input
-            type="text"
-            value={region}
-            onChange={(e) => setRegion(e.target.value)}
-            className="w-full p-2 rounded bg-gray-700 text-white text-right"
-            required
-          />
-        </div>
-
-        <div className="mb-4 flex flex-col items-center">
-          <label className="block mb-2">أقرب منطقة دالة</label>
-          <input
-            type="text"
-            value={nearestLandmark}
-            onChange={(e) => setNearestLandmark(e.target.value)}
-            className="w-full p-2 rounded bg-gray-700 text-white text-right"
-          />
-        </div>
-
-        <div className="mb-4 flex flex-col items-center">
-          <label className="block mb-2">الإيميل</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full p-2 rounded bg-gray-700 text-white text-right"
-          />
-        </div>
-
-        <div className="mb-4 flex flex-col items-center">
-          <label className="block mb-2">
-            رقم الهاتف <b style={{ color: 'red' }}>*</b>
-          </label>
-          <input
-            type="tel"
-            value={phoneNumber}
-            placeholder="07xxxxxxxxx"
-            onChange={(e) => setPhoneNumber(e.target.value)}
-            className="w-full p-2 rounded bg-gray-700 text-white text-right"
-            required
-          />
-        </div>
-
-        <div className="mb-4 flex flex-col items-center">
-          <label className="block mb-2">ملاحظات</label>
-          <textarea
-            value={notes}
-            onChange={(e) => setNotes(e.target.value)}
-            className="w-full p-2 rounded bg-gray-700 text-white text-right"
-            rows="3"
-          ></textarea>
-        </div>
-      </div>
-
-      {/* Right: Order Summary */}
-      <div className="w-1/2 bg-gray-900 p-8 rounded-lg text-white">
-        <h2 className="text-2xl mb-4 text-center">البضاعة المطلوبة</h2>
-
-        {cartItems.length === 0 ? (
-          <p>لا توجد بضاعة في العربة.</p>
-        ) : (
-          <table className="w-full text-center border-collapse">
-            <thead>
-              <tr className="border-b border-gray-700">
-                <th className="border-2 px-2 py-3 border-gray-500">المنتج</th>
-                <th className="border-2 px-2 py-3 border-gray-500">العدد</th>
-                <th className="border-2 px-2 py-3 border-gray-500">السعر</th>
-              </tr>
-            </thead>
-            <tbody>
-              {cartItems.map((item) => (
-                <tr key={item.id} className="border-b border-gray-700">
-                  <td className="border-2 px-2 py-3 border-gray-500">
-                    {item.name}
-                  </td>
-                  <td className="border-2 px-2 py-3 border-gray-500">
-                    {item.quantity}
-                  </td>
-                  <td className="border-2 px-2 py-3 border-gray-500">
-                    {formatNumber(item.price * item.quantity)} IQD
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-            <tfoot>
-              <tr>
-                <td colSpan="3" className="px-2 py-3 font-bold">
-                  المجموع: {formatNumber(totalAmount)} IQD
-                </td>
-              </tr>
-            </tfoot>
-          </table>
-        )}
-
-        {/* Submit button */}
-        <button
-          onClick={handleSubmit}
-          className="mt-4 w-full bg-green-600 p-4 rounded-lg text-xl font-bold text-white"
-        >
-          اطلب البضاعة
-        </button>
-      </div>
+      )}
     </div>
   );
 };

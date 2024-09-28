@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Card from './Card';
 import Spinner from './Spinner';
-import ClipLoader from 'react-spinners/ClipLoader';
+import { toast } from 'react-toastify';
 
 const Category = () => {
   const { id } = useParams();

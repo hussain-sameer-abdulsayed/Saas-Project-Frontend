@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Spinner from './Spinner';
-import ClipLoader from 'react-spinners/ClipLoader';
+import { toast } from 'react-toastify';
 
 const Product = () => {
   const { id } = useParams();
@@ -41,7 +41,7 @@ const Product = () => {
 
     // Save the updated cart to localStorage
     localStorage.setItem('cart', JSON.stringify(cart));
-    alert('Product added to cart!');
+    toast.success('Product added to cart!');
   };
 
   useEffect(() => {

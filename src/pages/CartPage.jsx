@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import EmptyCart from '../components/EmptyCart';
 import axios from 'axios';
 
 const CartPage = () => {
   const [cartItems, setCartItems] = useState([]);
   const [products, setProducts] = useState([]);
   const [totalAmount, setTotalAmount] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
 
@@ -28,6 +30,7 @@ const CartPage = () => {
     if (cart.length > 0) {
       fetchProducts();
     }
+    setLoading(false);
   }, []);
 
   useEffect(() => {
@@ -78,103 +81,108 @@ const CartPage = () => {
     setProducts(products.filter((product) => product.id !== id));
   };
 
-  if (cartItems.length === 0) {
-    return <p className="text-right">السلة فارغة</p>;
-  }
+  // if (cartItems.length === 0) {
+  //   return <p className="text-right">السلة فارغة</p>;
+  // }
 
   return (
     <div className="min-h-screen bg-gray-900 text-white pt-32 px-5">
-      <h2 className="text-3xl font-bold text-right">السلة</h2>
-      <div className="w-full max-w-5xl mx-auto">
-        <div className="flex justify-between">
-          {/* Back Button */}
-          <div className="text-right mb-6">
-            <button
-              onClick={() => navigate(-1)} // Navigate back to the last page
-              className="bg-zinc-500 hover:bg-zinc-600 text-white py-3 px-6 rounded-lg font-bold"
-            >
-              العودة
-            </button>
-          </div>
-          {/* Make Order Button */}
-          <div className="text-right">
-            <Link to="/order">
-              <button className="bg-blue-500 hover:bg-blue-800 text-white py-3 px-6 rounded-lg font-bold">
-                اشتري
-              </button>
-            </Link>
-          </div>
-        </div>
-
-        {/* Total Amount */}
-        <div className="text-right text-2xl font-bold mt-6 mb-5">
-          {formatNumber(totalAmount)} IQD السعر الكلي
-        </div>
-        {products.map((product) => (
-          <div
-            key={product.id}
-            className="flex items-center justify-between bg-gray-800 p-6 mb-4 rounded-lg"
-          >
-            <div className="flex items-center h-40">
-              <Link to={`/products/${product.id}`}>
-                <img
-                  src={product.mainImage}
-                  alt={product.name}
-                  className="w-32 h-32 object-cover rounded mr-5"
-                />
-              </Link>
-
-              <div>
-                <Link to={`/products/${product.id}`}>
-                  <h3 className="text-xl font-bold">{product.name}</h3>
-                  <p className="text-gray-400">
-                    {formatNumber(product.price)} IQD للقطعة
-                  </p>
+      {cartItems.length === 0 ? (
+        <EmptyCart />
+      ) : (
+        <div>
+          <div className="w-full max-w-5xl mx-auto">
+            <div className="flex justify-between">
+              {/* Back Button */}
+              <div className="text-right mb-6">
+                <button
+                  onClick={() => navigate(-1)} // Navigate back to the last page
+                  className="bg-zinc-500 hover:bg-zinc-600 text-white py-3 px-6 rounded-lg font-bold"
+                >
+                  العودة
+                </button>
+              </div>
+              {/* Make Order Button */}
+              <div className="text-right">
+                <Link to="/order">
+                  <button className="bg-blue-500 hover:bg-blue-800 text-white py-3 px-6 rounded-lg font-bold">
+                    اشتري
+                  </button>
                 </Link>
               </div>
             </div>
 
-            {/* Quantity Controls */}
-            <div className="flex items-center justify-center">
-              <button
-                onClick={() => handleQuantityChange(product.id, -1)}
-                className="bg-gray-600 text-white px-4 py-2 rounded-l-lg"
-              >
-                -
-              </button>
-              <input
-                type="text"
-                value={product.quantity}
-                readOnly
-                className="w-12 text-center bg-gray-700 text-white py-2"
-              />
-              <button
-                onClick={() => handleQuantityChange(product.id, 1)}
-                className="bg-gray-600 text-white px-4 py-2 rounded-r-lg"
-              >
-                +
-              </button>
+            {/* Total Amount */}
+            <div className="text-right text-2xl font-bold mt-6 mb-5">
+              {formatNumber(totalAmount)} IQD السعر الكلي
             </div>
+            {products.map((product) => (
+              <div
+                key={product.id}
+                className="flex items-center justify-between bg-gray-800 p-6 mb-4 rounded-lg"
+              >
+                <div className="flex items-center h-40">
+                  <Link to={`/products/${product.id}`}>
+                    <img
+                      src={product.mainImage}
+                      alt={product.name}
+                      className="w-32 h-32 object-cover rounded mr-5"
+                    />
+                  </Link>
 
-            <div className="flex flex-col">
-              {/* Price Section */}
-              <div className="text-right mb-2">
-                <p className="text-xl font-semibold">
-                  {formatNumber(product.price * product.quantity)} IQD
-                </p>
+                  <div>
+                    <Link to={`/products/${product.id}`}>
+                      <h3 className="text-xl font-bold">{product.name}</h3>
+                      <p className="text-gray-400">
+                        {formatNumber(product.price)} IQD للقطعة
+                      </p>
+                    </Link>
+                  </div>
+                </div>
+
+                {/* Quantity Controls */}
+                <div className="flex items-center justify-center">
+                  <button
+                    onClick={() => handleQuantityChange(product.id, -1)}
+                    className="bg-gray-600 text-white px-4 py-2 rounded-l-lg"
+                  >
+                    -
+                  </button>
+                  <input
+                    type="text"
+                    value={product.quantity}
+                    readOnly
+                    className="w-12 text-center bg-gray-700 text-white py-2"
+                  />
+                  <button
+                    onClick={() => handleQuantityChange(product.id, 1)}
+                    className="bg-gray-600 text-white px-4 py-2 rounded-r-lg"
+                  >
+                    +
+                  </button>
+                </div>
+
+                <div className="flex flex-col">
+                  {/* Price Section */}
+                  <div className="text-right mb-2">
+                    <p className="text-xl font-semibold">
+                      {formatNumber(product.price * product.quantity)} IQD
+                    </p>
+                  </div>
+
+                  {/* Remove Button */}
+                  <button
+                    onClick={() => removeFromCart(product.id)}
+                    className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded"
+                  >
+                    امسح من السلة
+                  </button>
+                </div>
               </div>
-
-              {/* Remove Button */}
-              <button
-                onClick={() => removeFromCart(product.id)}
-                className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded"
-              >
-                امسح من السلة
-              </button>
-            </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </div>
+      )}
     </div>
   );
 };

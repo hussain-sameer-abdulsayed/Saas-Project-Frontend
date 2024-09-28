@@ -141,7 +141,7 @@ const ContactPage = () => {
             </div>
 
             <button
-              onClick={'sendRequest'} // here change this
+              //onClick={sendRequest} // here change this
               type="submit"
               className="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 px-4 rounded-lg font-bold"
             >

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { toast } from 'react-toastify';
 
 // Function to handle adding to cart
 const addToCart = (item) => {
@@ -27,7 +26,7 @@ const addToCart = (item) => {
 
   // Save the updated cart to localStorage
   localStorage.setItem('cart', JSON.stringify(cart));
-  alert('Product added to cart!');
+  toast.success('Product added to cart!');
 };
 const formatNumber = (number) => {
   return number.toLocaleString();

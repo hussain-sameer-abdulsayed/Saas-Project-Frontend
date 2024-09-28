@@ -24,7 +24,7 @@ const Categories = () => {
   }, []);
 
   return (
-    <div className="py-8 bg-gray-900 pt-32">
+    <div className="bg-gray-900 py-32">
       {loading ? (
         <Spinner />
       ) : (
