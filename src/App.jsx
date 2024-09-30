@@ -15,6 +15,7 @@ import CartPage from './pages/CartPage';
 import OrderPage from './pages/OrderPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
+import SearchProductsPage from './pages/SearchProductsPage';
 
 const App = () => {
   const router = createBrowserRouter(
@@ -28,6 +29,7 @@ const App = () => {
         <Route path="/order" element={<OrderPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/search-product/:query" element={<SearchProductsPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     )
