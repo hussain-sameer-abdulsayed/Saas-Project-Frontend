@@ -73,8 +73,19 @@ const ContactPage = () => {
               className="rounded-lg border border-gray-300"
               title="Google Maps Location"
             ></iframe>
+
+            {/* <iframe
+              src="https://www.google.com/maps/d/u/0/embed?mid=1gwLl_rYJKyoUbDQ5njZIZezCI1TBdAo&ehbc=2E312F"
+              width="700"
+              height="700"
+              allowFullScreen=""
+              loading="lazy"
+              className="rounded-lg border border-gray-300"
+              title="Google Maps Location"
+            ></iframe> */}
           </div>
         </section>
+        {/* https://www.google.com/maps/d/u/0/edit?mid=1gwLl_rYJKyoUbDQ5njZIZezCI1TBdAo&usp=sharing*/}
 
         {/* Form Section */}
         <div className="w-full md:w-3/6 bg-gray-800 p-8 rounded-lg text-right">

@@ -17,13 +17,15 @@ const Category = () => {
         const res = await axios.get(
           `https://localhost:7249/api/products/category/${id}`
         );
-        setProducts(res.data);
+        setProducts(res.data); // FIXED HERE
       } catch (error) {
-        console.log('error while tring to get category products', error);
+        console.log('error while trying to get category products', error);
+        toast.error('Failed to load products');
       } finally {
         setLoading(false);
       }
     };
+
     fetchCategoryProducts();
   }, []);
   return (
